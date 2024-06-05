@@ -1,19 +1,4 @@
 definitions:
-  config.AliyunOSS:
-    properties:
-      access-key-id:
-        type: string
-      access-key-secret:
-        type: string
-      base-path:
-        type: string
-      bucket-name:
-        type: string
-      bucket-url:
-        type: string
-      endpoint:
-        type: string
-    type: object
   config.Autocode:
     properties:
       root:
@@ -43,27 +28,6 @@ definitions:
       web-form:
         type: string
       web-table:
-        type: string
-    type: object
-  config.AwsS3:
-    properties:
-      base-url:
-        type: string
-      bucket:
-        type: string
-      disable-ssl:
-        type: boolean
-      endpoint:
-        type: string
-      path-prefix:
-        type: string
-      region:
-        type: string
-      s3-force-path-style:
-        type: boolean
-      secret-id:
-        type: string
-      secret-key:
         type: string
     type: object
   config.CORS:
@@ -114,19 +78,6 @@ definitions:
   config.Excel:
     properties:
       dir:
-        type: string
-    type: object
-  config.HuaWeiObs:
-    properties:
-      access-key:
-        type: string
-      bucket:
-        type: string
-      endpoint:
-        type: string
-      path:
-        type: string
-      secret-key:
         type: string
     type: object
   config.JWT:
@@ -313,30 +264,6 @@ definitions:
         description: 数据库密码
         type: string
     type: object
-  config.Qiniu:
-    properties:
-      access-key:
-        description: 秘钥AK
-        type: string
-      bucket:
-        description: 空间名称
-        type: string
-      img-path:
-        description: CDN加速域名
-        type: string
-      secret-key:
-        description: 秘钥SK
-        type: string
-      use-cdn-domains:
-        description: 上传是否使用CDN上传加速
-        type: boolean
-      use-https:
-        description: 是否使用https
-        type: boolean
-      zone:
-        description: 存储区域
-        type: string
-    type: object
   config.Redis:
     properties:
       addr:
@@ -359,14 +286,10 @@ definitions:
     type: object
   config.Server:
     properties:
-      aliyun-oss:
-        $ref: '#/definitions/config.AliyunOSS'
       autocode:
         allOf:
         - $ref: '#/definitions/config.Autocode'
         description: auto
-      aws-s3:
-        $ref: '#/definitions/config.AwsS3'
       captcha:
         $ref: '#/definitions/config.Captcha'
       cors:
@@ -385,8 +308,6 @@ definitions:
         $ref: '#/definitions/github_com_flipped-aurora_gin-vue-admin_server_config.Email'
       excel:
         $ref: '#/definitions/config.Excel'
-      hua-wei-obs:
-        $ref: '#/definitions/config.HuaWeiObs'
       jwt:
         $ref: '#/definitions/config.JWT'
       local:
@@ -403,16 +324,12 @@ definitions:
         $ref: '#/definitions/config.Oracle'
       pgsql:
         $ref: '#/definitions/config.Pgsql'
-      qiniu:
-        $ref: '#/definitions/config.Qiniu'
       redis:
         $ref: '#/definitions/config.Redis'
       sqlite:
         $ref: '#/definitions/config.Sqlite'
       system:
         $ref: '#/definitions/config.System'
-      tencent-cos:
-        $ref: '#/definitions/config.TencentCOS'
       zap:
         $ref: '#/definitions/config.Zap'
     type: object
@@ -525,21 +442,6 @@ definitions:
       use-redis:
         description: 使用redis
         type: boolean
-    type: object
-  config.TencentCOS:
-    properties:
-      base-url:
-        type: string
-      bucket:
-        type: string
-      path-prefix:
-        type: string
-      region:
-        type: string
-      secret-id:
-        type: string
-      secret-key:
-        type: string
     type: object
   config.Zap:
     properties:

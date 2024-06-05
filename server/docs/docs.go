@@ -4522,29 +4522,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "config.AliyunOSS": {
-            "type": "object",
-            "properties": {
-                "access-key-id": {
-                    "type": "string"
-                },
-                "access-key-secret": {
-                    "type": "string"
-                },
-                "base-path": {
-                    "type": "string"
-                },
-                "bucket-name": {
-                    "type": "string"
-                },
-                "bucket-url": {
-                    "type": "string"
-                },
-                "endpoint": {
-                    "type": "string"
-                }
-            }
-        },
         "config.Autocode": {
             "type": "object",
             "properties": {
@@ -4588,38 +4565,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "web-table": {
-                    "type": "string"
-                }
-            }
-        },
-        "config.AwsS3": {
-            "type": "object",
-            "properties": {
-                "base-url": {
-                    "type": "string"
-                },
-                "bucket": {
-                    "type": "string"
-                },
-                "disable-ssl": {
-                    "type": "boolean"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "path-prefix": {
-                    "type": "string"
-                },
-                "region": {
-                    "type": "string"
-                },
-                "s3-force-path-style": {
-                    "type": "boolean"
-                },
-                "secret-id": {
-                    "type": "string"
-                },
-                "secret-key": {
                     "type": "string"
                 }
             }
@@ -4695,26 +4640,6 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "dir": {
-                    "type": "string"
-                }
-            }
-        },
-        "config.HuaWeiObs": {
-            "type": "object",
-            "properties": {
-                "access-key": {
-                    "type": "string"
-                },
-                "bucket": {
-                    "type": "string"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                },
-                "secret-key": {
                     "type": "string"
                 }
             }
@@ -4973,39 +4898,6 @@ const docTemplate = `{
                 }
             }
         },
-        "config.Qiniu": {
-            "type": "object",
-            "properties": {
-                "access-key": {
-                    "description": "秘钥AK",
-                    "type": "string"
-                },
-                "bucket": {
-                    "description": "空间名称",
-                    "type": "string"
-                },
-                "img-path": {
-                    "description": "CDN加速域名",
-                    "type": "string"
-                },
-                "secret-key": {
-                    "description": "秘钥SK",
-                    "type": "string"
-                },
-                "use-cdn-domains": {
-                    "description": "上传是否使用CDN上传加速",
-                    "type": "boolean"
-                },
-                "use-https": {
-                    "description": "是否使用https",
-                    "type": "boolean"
-                },
-                "zone": {
-                    "description": "存储区域",
-                    "type": "string"
-                }
-            }
-        },
         "config.Redis": {
             "type": "object",
             "properties": {
@@ -5037,9 +4929,6 @@ const docTemplate = `{
         "config.Server": {
             "type": "object",
             "properties": {
-                "aliyun-oss": {
-                    "$ref": "#/definitions/config.AliyunOSS"
-                },
                 "autocode": {
                     "description": "auto",
                     "allOf": [
@@ -5047,9 +4936,6 @@ const docTemplate = `{
                             "$ref": "#/definitions/config.Autocode"
                         }
                     ]
-                },
-                "aws-s3": {
-                    "$ref": "#/definitions/config.AwsS3"
                 },
                 "captcha": {
                     "$ref": "#/definitions/config.Captcha"
@@ -5080,9 +4966,6 @@ const docTemplate = `{
                 "excel": {
                     "$ref": "#/definitions/config.Excel"
                 },
-                "hua-wei-obs": {
-                    "$ref": "#/definitions/config.HuaWeiObs"
-                },
                 "jwt": {
                     "$ref": "#/definitions/config.JWT"
                 },
@@ -5111,9 +4994,6 @@ const docTemplate = `{
                 "pgsql": {
                     "$ref": "#/definitions/config.Pgsql"
                 },
-                "qiniu": {
-                    "$ref": "#/definitions/config.Qiniu"
-                },
                 "redis": {
                     "$ref": "#/definitions/config.Redis"
                 },
@@ -5122,9 +5002,6 @@ const docTemplate = `{
                 },
                 "system": {
                     "$ref": "#/definitions/config.System"
-                },
-                "tencent-cos": {
-                    "$ref": "#/definitions/config.TencentCOS"
                 },
                 "zap": {
                     "$ref": "#/definitions/config.Zap"
@@ -5281,29 +5158,6 @@ const docTemplate = `{
                 "use-redis": {
                     "description": "使用redis",
                     "type": "boolean"
-                }
-            }
-        },
-        "config.TencentCOS": {
-            "type": "object",
-            "properties": {
-                "base-url": {
-                    "type": "string"
-                },
-                "bucket": {
-                    "type": "string"
-                },
-                "path-prefix": {
-                    "type": "string"
-                },
-                "region": {
-                    "type": "string"
-                },
-                "secret-id": {
-                    "type": "string"
-                },
-                "secret-key": {
-                    "type": "string"
                 }
             }
         },
