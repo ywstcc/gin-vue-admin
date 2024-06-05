@@ -106,6 +106,11 @@ definitions:
         description: 防爆破验证码超时时间，单位：s(秒)
         type: integer
     type: object
+  config.DiskList:
+    properties:
+      mount-point:
+        type: string
+    type: object
   config.Excel:
     properties:
       dir:
@@ -146,53 +151,6 @@ definitions:
         type: string
       store-path:
         description: 本地文件存储路径
-        type: string
-    type: object
-  config.Mongo:
-    properties:
-      coll:
-        description: collection name
-        type: string
-      connect-timeout-ms:
-        description: 连接超时时间
-        type: integer
-      database:
-        description: database name
-        type: string
-      hosts:
-        description: 主机列表
-        items:
-          $ref: '#/definitions/config.MongoHost'
-        type: array
-      is-zap:
-        description: 是否开启zap日志
-        type: boolean
-      max-pool-size:
-        description: 最大连接池
-        type: integer
-      min-pool-size:
-        description: 最小连接池
-        type: integer
-      options:
-        description: mongodb options
-        type: string
-      password:
-        description: 密码
-        type: string
-      socket-timeout-ms:
-        description: socket超时时间
-        type: integer
-      username:
-        description: 用户名
-        type: string
-    type: object
-  config.MongoHost:
-    properties:
-      host:
-        description: ip地址
-        type: string
-      port:
-        description: 端口
         type: string
     type: object
   config.Mssql:
@@ -384,12 +342,20 @@ definitions:
       addr:
         description: 服务器地址:端口
         type: string
+      clusterAddrs:
+        description: 集群模式下的节点地址列表
+        items:
+          type: string
+        type: array
       db:
-        description: redis的哪个数据库
+        description: 单实例模式下redis的哪个数据库
         type: integer
       password:
         description: 密码
         type: string
+      useCluster:
+        description: 是否使用集群模式
+        type: boolean
     type: object
   config.Server:
     properties:
@@ -411,6 +377,10 @@ definitions:
         items:
           $ref: '#/definitions/config.SpecializedDB'
         type: array
+      disk-list:
+        items:
+          $ref: '#/definitions/config.DiskList'
+        type: array
       email:
         $ref: '#/definitions/github_com_flipped-aurora_gin-vue-admin_server_config.Email'
       excel:
@@ -423,8 +393,6 @@ definitions:
         allOf:
         - $ref: '#/definitions/config.Local'
         description: oss
-      mongo:
-        $ref: '#/definitions/config.Mongo'
       mssql:
         $ref: '#/definitions/config.Mssql'
       mysql:
@@ -542,9 +510,6 @@ definitions:
       db-type:
         description: 数据库类型:mysql(默认)|sqlite|sqlserver|postgresql
         type: string
-      env:
-        description: 环境值
-        type: string
       iplimit-count:
         type: integer
       iplimit-time:
@@ -554,9 +519,6 @@ definitions:
         type: string
       router-prefix:
         type: string
-      use-mongo:
-        description: 使用redis
-        type: boolean
       use-multipoint:
         description: 多点登录拦截
         type: boolean
@@ -596,9 +558,6 @@ definitions:
       log-in-console:
         description: 输出控制台
         type: boolean
-      max-age:
-        description: 日志留存时间
-        type: integer
       prefix:
         description: 日志前缀
         type: string
@@ -607,102 +566,6 @@ definitions:
         type: boolean
       stacktrace-key:
         description: 栈名
-        type: string
-    type: object
-  example.ExaCustomer:
-    properties:
-      ID:
-        description: 主键ID
-        type: integer
-      createdAt:
-        description: 创建时间
-        type: string
-      customerName:
-        description: 客户名
-        type: string
-      customerPhoneData:
-        description: 客户手机号
-        type: string
-      sysUser:
-        allOf:
-        - $ref: '#/definitions/system.SysUser'
-        description: 管理详情
-      sysUserAuthorityID:
-        description: 管理角色ID
-        type: integer
-      sysUserId:
-        description: 管理ID
-        type: integer
-      updatedAt:
-        description: 更新时间
-        type: string
-    type: object
-  example.ExaFile:
-    properties:
-      ID:
-        description: 主键ID
-        type: integer
-      chunkTotal:
-        type: integer
-      createdAt:
-        description: 创建时间
-        type: string
-      exaFileChunk:
-        items:
-          $ref: '#/definitions/example.ExaFileChunk'
-        type: array
-      fileMd5:
-        type: string
-      fileName:
-        type: string
-      filePath:
-        type: string
-      isFinish:
-        type: boolean
-      updatedAt:
-        description: 更新时间
-        type: string
-    type: object
-  example.ExaFileChunk:
-    properties:
-      ID:
-        description: 主键ID
-        type: integer
-      createdAt:
-        description: 创建时间
-        type: string
-      exaFileID:
-        type: integer
-      fileChunkNumber:
-        type: integer
-      fileChunkPath:
-        type: string
-      updatedAt:
-        description: 更新时间
-        type: string
-    type: object
-  example.ExaFileUploadAndDownload:
-    properties:
-      ID:
-        description: 主键ID
-        type: integer
-      createdAt:
-        description: 创建时间
-        type: string
-      key:
-        description: 编号
-        type: string
-      name:
-        description: 文件名
-        type: string
-      tag:
-        description: 文件标签
-        type: string
-      updatedAt:
-        description: 更新时间
-        type: string
-      url:
-        description: 文件地址
         type: string
     type: object
   github_com_flipped-aurora_gin-vue-admin_server_config.Email:
@@ -790,6 +653,8 @@ definitions:
     type: object
   request.InitDB:
     properties:
+      adminPassword:
+        type: string
       dbName:
         description: 数据库名
         type: string
@@ -812,6 +677,7 @@ definitions:
         description: 数据库用户名
         type: string
     required:
+    - adminPassword
     - dbName
     type: object
   request.Login:
@@ -970,26 +836,6 @@ definitions:
         description: 邮件发送给谁
         type: string
     type: object
-  response.ExaCustomerResponse:
-    properties:
-      customer:
-        $ref: '#/definitions/example.ExaCustomer'
-    type: object
-  response.ExaFileResponse:
-    properties:
-      file:
-        $ref: '#/definitions/example.ExaFileUploadAndDownload'
-    type: object
-  response.FilePathResponse:
-    properties:
-      filePath:
-        type: string
-    type: object
-  response.FileResponse:
-    properties:
-      file:
-        $ref: '#/definitions/example.ExaFile'
-    type: object
   response.LoginResponse:
     properties:
       expiresAt:
@@ -1104,11 +950,11 @@ definitions:
       autoCreateApiToSql:
         description: 是否自动创建api
         type: boolean
+      autoCreateMenuToSql:
+        description: 是否自动创建menu
+        type: boolean
       autoCreateResource:
         description: 是否自动创建资源标识
-        type: boolean
-      autoMoveFile:
-        description: 是否自动移动文件
         type: boolean
       businessDB:
         description: 业务数据库
@@ -1120,7 +966,8 @@ definitions:
         items:
           $ref: '#/definitions/system.Field'
         type: array
-      hasTimer:
+      gvaModel:
+        description: 是否使用gva默认Model
         type: boolean
       humpPackageName:
         description: go文件名称
@@ -1130,6 +977,8 @@ definitions:
       packageName:
         description: 文件名称
         type: string
+      primaryField:
+        $ref: '#/definitions/system.Field'
       structName:
         description: Struct名称
         type: string
@@ -1137,8 +986,43 @@ definitions:
         description: 表名
         type: string
     type: object
+  system.Condition:
+    properties:
+      ID:
+        description: 主键ID
+        type: integer
+      column:
+        type: string
+      createdAt:
+        description: 创建时间
+        type: string
+      from:
+        type: string
+      operator:
+        type: string
+      templateID:
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
+  system.DataSource:
+    properties:
+      association:
+        description: 关联关系 1 一对一 2 一对多
+        type: integer
+      label:
+        type: string
+      table:
+        type: string
+      value:
+        type: string
+    type: object
   system.Field:
     properties:
+      checkDataSource:
+        description: 是否检查数据源
+        type: boolean
       clearable:
         description: 是否可清空
         type: boolean
@@ -1148,8 +1032,15 @@ definitions:
       comment:
         description: 数据库字段描述
         type: string
+      dataSource:
+        allOf:
+        - $ref: '#/definitions/system.DataSource'
+        description: 数据源
       dataTypeLong:
         description: 数据库字段长度
+        type: string
+      defaultValue:
+        description: 是否必填
         type: string
       dictType:
         description: 字典
@@ -1172,12 +1063,38 @@ definitions:
       fieldType:
         description: Field数据类型
         type: string
+      front:
+        description: 是否前端可见
+        type: boolean
+      primaryKey:
+        description: 是否主键
+        type: boolean
       require:
         description: 是否必填
         type: boolean
       sort:
         description: 是否增加排序
         type: boolean
+    type: object
+  system.JoinTemplate:
+    properties:
+      ID:
+        description: 主键ID
+        type: integer
+      createdAt:
+        description: 创建时间
+        type: string
+      joins:
+        type: string
+      "on":
+        type: string
+      table:
+        type: string
+      templateID:
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
     type: object
   system.Meta:
     properties:
@@ -1315,7 +1232,7 @@ definitions:
         type: array
       parentId:
         description: 父菜单ID
-        type: string
+        type: integer
       path:
         description: 路由path
         type: string
@@ -1423,7 +1340,46 @@ definitions:
         type: string
       value:
         description: 字典值
+        type: string
+    type: object
+  system.SysExportTemplate:
+    properties:
+      ID:
+        description: 主键ID
         type: integer
+      conditions:
+        items:
+          $ref: '#/definitions/system.Condition'
+        type: array
+      createdAt:
+        description: 创建时间
+        type: string
+      dbName:
+        description: 数据库名称
+        type: string
+      joinTemplate:
+        items:
+          $ref: '#/definitions/system.JoinTemplate'
+        type: array
+      limit:
+        type: integer
+      name:
+        description: 模板名称
+        type: string
+      order:
+        type: string
+      tableName:
+        description: 表名称
+        type: string
+      templateID:
+        description: 模板标识
+        type: string
+      templateInfo:
+        description: 模板信息
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
     type: object
   system.SysMenu:
     properties:
@@ -1456,7 +1412,7 @@ definitions:
           $ref: '#/definitions/system.SysBaseMenuBtn'
         type: array
       menuId:
-        type: string
+        type: integer
       meta:
         allOf:
         - $ref: '#/definitions/system.Meta'
@@ -1470,7 +1426,7 @@ definitions:
         type: array
       parentId:
         description: 父菜单ID
-        type: string
+        type: integer
       path:
         description: 路由path
         type: string
@@ -2580,175 +2536,6 @@ paths:
       summary: 获取权限列表
       tags:
       - Casbin
-  /customer/customer:
-    delete:
-      consumes:
-      - application/json
-      parameters:
-      - description: 客户ID
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/example.ExaCustomer'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 删除客户
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 删除客户
-      tags:
-      - ExaCustomer
-    get:
-      consumes:
-      - application/json
-      parameters:
-      - description: 主键ID
-        in: query
-        name: ID
-        type: integer
-      - description: 创建时间
-        in: query
-        name: createdAt
-        type: string
-      - description: 客户名
-        in: query
-        name: customerName
-        type: string
-      - description: 客户手机号
-        in: query
-        name: customerPhoneData
-        type: string
-      - description: 管理角色ID
-        in: query
-        name: sysUserAuthorityID
-        type: integer
-      - description: 管理ID
-        in: query
-        name: sysUserId
-        type: integer
-      - description: 更新时间
-        in: query
-        name: updatedAt
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 获取单一客户信息,返回包括客户详情
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/response.ExaCustomerResponse'
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 获取单一客户信息
-      tags:
-      - ExaCustomer
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: 客户用户名, 客户手机号码
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/example.ExaCustomer'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 创建客户
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 创建客户
-      tags:
-      - ExaCustomer
-    put:
-      consumes:
-      - application/json
-      parameters:
-      - description: 客户ID, 客户信息
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/example.ExaCustomer'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 更新客户信息
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 更新客户信息
-      tags:
-      - ExaCustomer
-  /customer/customerList:
-    get:
-      consumes:
-      - application/json
-      parameters:
-      - description: 关键字
-        in: query
-        name: keyword
-        type: string
-      - description: 页码
-        in: query
-        name: page
-        type: integer
-      - description: 每页大小
-        in: query
-        name: pageSize
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 分页获取权限客户列表,返回包括列表,总数,页码,每页数量
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/response.PageResult'
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 分页获取权限客户列表
-      tags:
-      - ExaCustomer
   /email/emailTest:
     post:
       produces:
@@ -2784,174 +2571,6 @@ paths:
       summary: 发送邮件
       tags:
       - System
-  /fileUploadAndDownload/breakpointContinue:
-    post:
-      consumes:
-      - multipart/form-data
-      parameters:
-      - description: an example for breakpoint resume, 断点续传示例
-        in: formData
-        name: file
-        required: true
-        type: file
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 断点续传到服务器
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 断点续传到服务器
-      tags:
-      - ExaFileUploadAndDownload
-  /fileUploadAndDownload/deleteFile:
-    post:
-      parameters:
-      - description: 传入文件里面id即可
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/example.ExaFileUploadAndDownload'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 删除文件
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 删除文件
-      tags:
-      - ExaFileUploadAndDownload
-  /fileUploadAndDownload/findFile:
-    post:
-      consumes:
-      - multipart/form-data
-      parameters:
-      - description: 上传文件完成
-        in: formData
-        name: file
-        required: true
-        type: file
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 创建文件,返回包括文件路径
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/response.FilePathResponse'
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 创建文件
-      tags:
-      - ExaFileUploadAndDownload
-  /fileUploadAndDownload/getFileList:
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: 页码, 每页大小
-        in: body
-        name: data
-        required: true
-        schema:
-          $ref: '#/definitions/request.PageInfo'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 分页文件列表,返回包括列表,总数,页码,每页数量
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/response.PageResult'
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 分页文件列表
-      tags:
-      - ExaFileUploadAndDownload
-  /fileUploadAndDownload/removeChunk:
-    post:
-      consumes:
-      - multipart/form-data
-      parameters:
-      - description: 删除缓存切片
-        in: formData
-        name: file
-        required: true
-        type: file
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 删除切片
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 删除切片
-      tags:
-      - ExaFileUploadAndDownload
-  /fileUploadAndDownload/upload:
-    post:
-      consumes:
-      - multipart/form-data
-      parameters:
-      - description: 上传文件示例
-        in: formData
-        name: file
-        required: true
-        type: file
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 上传文件示例,返回包括文件详情
-          schema:
-            allOf:
-            - $ref: '#/definitions/response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/response.ExaFileResponse'
-                msg:
-                  type: string
-              type: object
-      security:
-      - ApiKeyAuth: []
-      summary: 上传文件示例
-      tags:
-      - ExaFileUploadAndDownload
   /init/checkdb:
     post:
       produces:
@@ -3532,7 +3151,7 @@ paths:
       - description: 字典值
         in: query
         name: value
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -3605,7 +3224,7 @@ paths:
       - description: 字典值
         in: query
         name: value
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -3653,6 +3272,250 @@ paths:
       summary: 更新SysDictionaryDetail
       tags:
       - SysDictionaryDetail
+  /sysExportTemplate/createSysExportTemplate:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 创建导出模板
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.SysExportTemplate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"创建成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 创建导出模板
+      tags:
+      - SysExportTemplate
+  /sysExportTemplate/deleteSysExportTemplate:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 删除导出模板
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.SysExportTemplate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除导出模板
+      tags:
+      - SysExportTemplate
+  /sysExportTemplate/deleteSysExportTemplateByIds:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: 批量删除导出模板
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.IdsReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"批量删除成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除导出模板
+      tags:
+      - SysExportTemplate
+  /sysExportTemplate/exportExcel:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: 导出表格模板
+      tags:
+      - SysExportTemplate
+  /sysExportTemplate/findSysExportTemplate:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 主键ID
+        in: query
+        name: ID
+        type: integer
+      - description: 创建时间
+        in: query
+        name: createdAt
+        type: string
+      - description: 数据库名称
+        in: query
+        name: dbName
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - description: 模板名称
+        in: query
+        name: name
+        type: string
+      - in: query
+        name: order
+        type: string
+      - description: 表名称
+        in: query
+        name: tableName
+        type: string
+      - description: 模板标识
+        in: query
+        name: templateID
+        type: string
+      - description: 模板信息
+        in: query
+        name: templateInfo
+        type: string
+      - description: 更新时间
+        in: query
+        name: updatedAt
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"查询成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 用id查询导出模板
+      tags:
+      - SysExportTemplate
+  /sysExportTemplate/getSysExportTemplateList:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 主键ID
+        in: query
+        name: ID
+        type: integer
+      - description: 创建时间
+        in: query
+        name: createdAt
+        type: string
+      - description: 数据库名称
+        in: query
+        name: dbName
+        type: string
+      - in: query
+        name: endCreatedAt
+        type: string
+      - description: 关键字
+        in: query
+        name: keyword
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - description: 模板名称
+        in: query
+        name: name
+        type: string
+      - in: query
+        name: order
+        type: string
+      - description: 页码
+        in: query
+        name: page
+        type: integer
+      - description: 每页大小
+        in: query
+        name: pageSize
+        type: integer
+      - in: query
+        name: startCreatedAt
+        type: string
+      - description: 表名称
+        in: query
+        name: tableName
+        type: string
+      - description: 模板标识
+        in: query
+        name: templateID
+        type: string
+      - description: 模板信息
+        in: query
+        name: templateInfo
+        type: string
+      - description: 更新时间
+        in: query
+        name: updatedAt
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取导出模板列表
+      tags:
+      - SysExportTemplate
+  /sysExportTemplate/importExcel:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: 导入表格
+      tags:
+      - SysImportTemplate
+  /sysExportTemplate/updateSysExportTemplate:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 更新导出模板
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.SysExportTemplate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"success":true,"data":{},"msg":"更新成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新导出模板
+      tags:
+      - SysExportTemplate
   /sysOperationRecord/createSysOperationRecord:
     post:
       consumes:

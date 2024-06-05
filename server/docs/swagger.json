@@ -1771,298 +1771,6 @@
                 }
             }
         },
-        "/customer/customer": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaCustomer"
-                ],
-                "summary": "获取单一客户信息",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "主键ID",
-                        "name": "ID",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "创建时间",
-                        "name": "createdAt",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "客户名",
-                        "name": "customerName",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "客户手机号",
-                        "name": "customerPhoneData",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "管理角色ID",
-                        "name": "sysUserAuthorityID",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "管理ID",
-                        "name": "sysUserId",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "更新时间",
-                        "name": "updatedAt",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取单一客户信息,返回包括客户详情",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.ExaCustomerResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            "put": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaCustomer"
-                ],
-                "summary": "更新客户信息",
-                "parameters": [
-                    {
-                        "description": "客户ID, 客户信息",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/example.ExaCustomer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "更新客户信息",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaCustomer"
-                ],
-                "summary": "创建客户",
-                "parameters": [
-                    {
-                        "description": "客户用户名, 客户手机号码",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/example.ExaCustomer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "创建客户",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaCustomer"
-                ],
-                "summary": "删除客户",
-                "parameters": [
-                    {
-                        "description": "客户ID",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/example.ExaCustomer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除客户",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/customer/customerList": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaCustomer"
-                ],
-                "summary": "分页获取权限客户列表",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "关键字",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "页码",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "每页大小",
-                        "name": "pageSize",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "分页获取权限客户列表,返回包括列表,总数,页码,每页数量",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
         "/email/emailTest": {
             "post": {
                 "security": [
@@ -2117,304 +1825,6 @@
                         "description": "{\"success\":true,\"data\":{},\"msg\":\"发送成功\"}",
                         "schema": {
                             "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/fileUploadAndDownload/breakpointContinue": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaFileUploadAndDownload"
-                ],
-                "summary": "断点续传到服务器",
-                "parameters": [
-                    {
-                        "type": "file",
-                        "description": "an example for breakpoint resume, 断点续传示例",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "断点续传到服务器",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/fileUploadAndDownload/deleteFile": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaFileUploadAndDownload"
-                ],
-                "summary": "删除文件",
-                "parameters": [
-                    {
-                        "description": "传入文件里面id即可",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/example.ExaFileUploadAndDownload"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除文件",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/fileUploadAndDownload/findFile": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaFileUploadAndDownload"
-                ],
-                "summary": "创建文件",
-                "parameters": [
-                    {
-                        "type": "file",
-                        "description": "上传文件完成",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "创建文件,返回包括文件路径",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.FilePathResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/fileUploadAndDownload/getFileList": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaFileUploadAndDownload"
-                ],
-                "summary": "分页文件列表",
-                "parameters": [
-                    {
-                        "description": "页码, 每页大小",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.PageInfo"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "分页文件列表,返回包括列表,总数,页码,每页数量",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/fileUploadAndDownload/removeChunk": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaFileUploadAndDownload"
-                ],
-                "summary": "删除切片",
-                "parameters": [
-                    {
-                        "type": "file",
-                        "description": "删除缓存切片",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除切片",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/fileUploadAndDownload/upload": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ExaFileUploadAndDownload"
-                ],
-                "summary": "上传文件示例",
-                "parameters": [
-                    {
-                        "type": "file",
-                        "description": "上传文件示例",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "上传文件示例,返回包括文件详情",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.ExaFileResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
                         }
                     }
                 }
@@ -3442,7 +2852,7 @@
                         "in": "query"
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "字典值",
                         "name": "value",
                         "in": "query"
@@ -3559,7 +2969,7 @@
                         "in": "query"
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "字典值",
                         "name": "value",
                         "in": "query"
@@ -3635,6 +3045,400 @@
                                     }
                                 }
                             ]
+                        }
+                    }
+                }
+            }
+        },
+        "/sysExportTemplate/createSysExportTemplate": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "创建导出模板",
+                "parameters": [
+                    {
+                        "description": "创建导出模板",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/system.SysExportTemplate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sysExportTemplate/deleteSysExportTemplate": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "删除导出模板",
+                "parameters": [
+                    {
+                        "description": "删除导出模板",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/system.SysExportTemplate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sysExportTemplate/deleteSysExportTemplateByIds": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "批量删除导出模板",
+                "parameters": [
+                    {
+                        "description": "批量删除导出模板",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.IdsReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"批量删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sysExportTemplate/exportExcel": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "导出表格模板",
+                "responses": {}
+            }
+        },
+        "/sysExportTemplate/findSysExportTemplate": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "用id查询导出模板",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "主键ID",
+                        "name": "ID",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "创建时间",
+                        "name": "createdAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据库名称",
+                        "name": "dbName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模板名称",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "表名称",
+                        "name": "tableName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模板标识",
+                        "name": "templateID",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模板信息",
+                        "name": "templateInfo",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "更新时间",
+                        "name": "updatedAt",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sysExportTemplate/getSysExportTemplateList": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "分页获取导出模板列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "主键ID",
+                        "name": "ID",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "创建时间",
+                        "name": "createdAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据库名称",
+                        "name": "dbName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "endCreatedAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "关键字",
+                        "name": "keyword",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模板名称",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页大小",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "startCreatedAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "表名称",
+                        "name": "tableName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模板标识",
+                        "name": "templateID",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模板信息",
+                        "name": "templateInfo",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "更新时间",
+                        "name": "updatedAt",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/sysExportTemplate/importExcel": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysImportTemplate"
+                ],
+                "summary": "导入表格",
+                "responses": {}
+            }
+        },
+        "/sysExportTemplate/updateSysExportTemplate": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SysExportTemplate"
+                ],
+                "summary": "更新导出模板",
+                "parameters": [
+                    {
+                        "description": "更新导出模板",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/system.SysExportTemplate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -4871,6 +4675,14 @@
                 }
             }
         },
+        "config.DiskList": {
+            "type": "object",
+            "properties": {
+                "mount-point": {
+                    "type": "string"
+                }
+            }
+        },
         "config.Excel": {
             "type": "object",
             "properties": {
@@ -4929,71 +4741,6 @@
                 },
                 "store-path": {
                     "description": "本地文件存储路径",
-                    "type": "string"
-                }
-            }
-        },
-        "config.Mongo": {
-            "type": "object",
-            "properties": {
-                "coll": {
-                    "description": "collection name",
-                    "type": "string"
-                },
-                "connect-timeout-ms": {
-                    "description": "连接超时时间",
-                    "type": "integer"
-                },
-                "database": {
-                    "description": "database name",
-                    "type": "string"
-                },
-                "hosts": {
-                    "description": "主机列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/config.MongoHost"
-                    }
-                },
-                "is-zap": {
-                    "description": "是否开启zap日志",
-                    "type": "boolean"
-                },
-                "max-pool-size": {
-                    "description": "最大连接池",
-                    "type": "integer"
-                },
-                "min-pool-size": {
-                    "description": "最小连接池",
-                    "type": "integer"
-                },
-                "options": {
-                    "description": "mongodb options",
-                    "type": "string"
-                },
-                "password": {
-                    "description": "密码",
-                    "type": "string"
-                },
-                "socket-timeout-ms": {
-                    "description": "socket超时时间",
-                    "type": "integer"
-                },
-                "username": {
-                    "description": "用户名",
-                    "type": "string"
-                }
-            }
-        },
-        "config.MongoHost": {
-            "type": "object",
-            "properties": {
-                "host": {
-                    "description": "ip地址",
-                    "type": "string"
-                },
-                "port": {
-                    "description": "端口",
                     "type": "string"
                 }
             }
@@ -5258,13 +5005,24 @@
                     "description": "服务器地址:端口",
                     "type": "string"
                 },
+                "clusterAddrs": {
+                    "description": "集群模式下的节点地址列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "db": {
-                    "description": "redis的哪个数据库",
+                    "description": "单实例模式下redis的哪个数据库",
                     "type": "integer"
                 },
                 "password": {
                     "description": "密码",
                     "type": "string"
+                },
+                "useCluster": {
+                    "description": "是否使用集群模式",
+                    "type": "boolean"
                 }
             }
         },
@@ -5302,6 +5060,12 @@
                         "$ref": "#/definitions/config.SpecializedDB"
                     }
                 },
+                "disk-list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.DiskList"
+                    }
+                },
                 "email": {
                     "$ref": "#/definitions/github_com_flipped-aurora_gin-vue-admin_server_config.Email"
                 },
@@ -5321,9 +5085,6 @@
                             "$ref": "#/definitions/config.Local"
                         }
                     ]
-                },
-                "mongo": {
-                    "$ref": "#/definitions/config.Mongo"
                 },
                 "mssql": {
                     "$ref": "#/definitions/config.Mssql"
@@ -5492,10 +5253,6 @@
                     "description": "数据库类型:mysql(默认)|sqlite|sqlserver|postgresql",
                     "type": "string"
                 },
-                "env": {
-                    "description": "环境值",
-                    "type": "string"
-                },
                 "iplimit-count": {
                     "type": "integer"
                 },
@@ -5508,10 +5265,6 @@
                 },
                 "router-prefix": {
                     "type": "string"
-                },
-                "use-mongo": {
-                    "description": "使用redis",
-                    "type": "boolean"
                 },
                 "use-multipoint": {
                     "description": "多点登录拦截",
@@ -5569,10 +5322,6 @@
                     "description": "输出控制台",
                     "type": "boolean"
                 },
-                "max-age": {
-                    "description": "日志留存时间",
-                    "type": "integer"
-                },
                 "prefix": {
                     "description": "日志前缀",
                     "type": "string"
@@ -5583,144 +5332,6 @@
                 },
                 "stacktrace-key": {
                     "description": "栈名",
-                    "type": "string"
-                }
-            }
-        },
-        "example.ExaCustomer": {
-            "type": "object",
-            "properties": {
-                "ID": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "customerName": {
-                    "description": "客户名",
-                    "type": "string"
-                },
-                "customerPhoneData": {
-                    "description": "客户手机号",
-                    "type": "string"
-                },
-                "sysUser": {
-                    "description": "管理详情",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/system.SysUser"
-                        }
-                    ]
-                },
-                "sysUserAuthorityID": {
-                    "description": "管理角色ID",
-                    "type": "integer"
-                },
-                "sysUserId": {
-                    "description": "管理ID",
-                    "type": "integer"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "example.ExaFile": {
-            "type": "object",
-            "properties": {
-                "ID": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "chunkTotal": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "exaFileChunk": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/example.ExaFileChunk"
-                    }
-                },
-                "fileMd5": {
-                    "type": "string"
-                },
-                "fileName": {
-                    "type": "string"
-                },
-                "filePath": {
-                    "type": "string"
-                },
-                "isFinish": {
-                    "type": "boolean"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "example.ExaFileChunk": {
-            "type": "object",
-            "properties": {
-                "ID": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "exaFileID": {
-                    "type": "integer"
-                },
-                "fileChunkNumber": {
-                    "type": "integer"
-                },
-                "fileChunkPath": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "example.ExaFileUploadAndDownload": {
-            "type": "object",
-            "properties": {
-                "ID": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "key": {
-                    "description": "编号",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "文件名",
-                    "type": "string"
-                },
-                "tag": {
-                    "description": "文件标签",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                },
-                "url": {
-                    "description": "文件地址",
                     "type": "string"
                 }
             }
@@ -5849,9 +5460,13 @@
         "request.InitDB": {
             "type": "object",
             "required": [
+                "adminPassword",
                 "dbName"
             ],
             "properties": {
+                "adminPassword": {
+                    "type": "string"
+                },
                 "dbName": {
                     "description": "数据库名",
                     "type": "string"
@@ -6102,38 +5717,6 @@
                 }
             }
         },
-        "response.ExaCustomerResponse": {
-            "type": "object",
-            "properties": {
-                "customer": {
-                    "$ref": "#/definitions/example.ExaCustomer"
-                }
-            }
-        },
-        "response.ExaFileResponse": {
-            "type": "object",
-            "properties": {
-                "file": {
-                    "$ref": "#/definitions/example.ExaFileUploadAndDownload"
-                }
-            }
-        },
-        "response.FilePathResponse": {
-            "type": "object",
-            "properties": {
-                "filePath": {
-                    "type": "string"
-                }
-            }
-        },
-        "response.FileResponse": {
-            "type": "object",
-            "properties": {
-                "file": {
-                    "$ref": "#/definitions/example.ExaFile"
-                }
-            }
-        },
         "response.LoginResponse": {
             "type": "object",
             "properties": {
@@ -6310,12 +5893,12 @@
                     "description": "是否自动创建api",
                     "type": "boolean"
                 },
-                "autoCreateResource": {
-                    "description": "是否自动创建资源标识",
+                "autoCreateMenuToSql": {
+                    "description": "是否自动创建menu",
                     "type": "boolean"
                 },
-                "autoMoveFile": {
-                    "description": "是否自动移动文件",
+                "autoCreateResource": {
+                    "description": "是否自动创建资源标识",
                     "type": "boolean"
                 },
                 "businessDB": {
@@ -6332,7 +5915,8 @@
                         "$ref": "#/definitions/system.Field"
                     }
                 },
-                "hasTimer": {
+                "gvaModel": {
+                    "description": "是否使用gva默认Model",
                     "type": "boolean"
                 },
                 "humpPackageName": {
@@ -6346,6 +5930,9 @@
                     "description": "文件名称",
                     "type": "string"
                 },
+                "primaryField": {
+                    "$ref": "#/definitions/system.Field"
+                },
                 "structName": {
                     "description": "Struct名称",
                     "type": "string"
@@ -6356,9 +5943,60 @@
                 }
             }
         },
+        "system.Condition": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "description": "主键ID",
+                    "type": "integer"
+                },
+                "column": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "templateID": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
+        "system.DataSource": {
+            "type": "object",
+            "properties": {
+                "association": {
+                    "description": "关联关系 1 一对一 2 一对多",
+                    "type": "integer"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "table": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
         "system.Field": {
             "type": "object",
             "properties": {
+                "checkDataSource": {
+                    "description": "是否检查数据源",
+                    "type": "boolean"
+                },
                 "clearable": {
                     "description": "是否可清空",
                     "type": "boolean"
@@ -6371,8 +6009,20 @@
                     "description": "数据库字段描述",
                     "type": "string"
                 },
+                "dataSource": {
+                    "description": "数据源",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/system.DataSource"
+                        }
+                    ]
+                },
                 "dataTypeLong": {
                     "description": "数据库字段长度",
+                    "type": "string"
+                },
+                "defaultValue": {
+                    "description": "是否必填",
                     "type": "string"
                 },
                 "dictType": {
@@ -6403,6 +6053,14 @@
                     "description": "Field数据类型",
                     "type": "string"
                 },
+                "front": {
+                    "description": "是否前端可见",
+                    "type": "boolean"
+                },
+                "primaryKey": {
+                    "description": "是否主键",
+                    "type": "boolean"
+                },
                 "require": {
                     "description": "是否必填",
                     "type": "boolean"
@@ -6410,6 +6068,35 @@
                 "sort": {
                     "description": "是否增加排序",
                     "type": "boolean"
+                }
+            }
+        },
+        "system.JoinTemplate": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "description": "主键ID",
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "joins": {
+                    "type": "string"
+                },
+                "on": {
+                    "type": "string"
+                },
+                "table": {
+                    "type": "string"
+                },
+                "templateID": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "更新时间",
+                    "type": "string"
                 }
             }
         },
@@ -6607,7 +6294,7 @@
                 },
                 "parentId": {
                     "description": "父菜单ID",
-                    "type": "string"
+                    "type": "integer"
                 },
                 "path": {
                     "description": "路由path",
@@ -6757,7 +6444,62 @@
                 },
                 "value": {
                     "description": "字典值",
+                    "type": "string"
+                }
+            }
+        },
+        "system.SysExportTemplate": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "description": "主键ID",
                     "type": "integer"
+                },
+                "conditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/system.Condition"
+                    }
+                },
+                "createdAt": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "dbName": {
+                    "description": "数据库名称",
+                    "type": "string"
+                },
+                "joinTemplate": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/system.JoinTemplate"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "模板名称",
+                    "type": "string"
+                },
+                "order": {
+                    "type": "string"
+                },
+                "tableName": {
+                    "description": "表名称",
+                    "type": "string"
+                },
+                "templateID": {
+                    "description": "模板标识",
+                    "type": "string"
+                },
+                "templateInfo": {
+                    "description": "模板信息",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "更新时间",
+                    "type": "string"
                 }
             }
         },
@@ -6805,7 +6547,7 @@
                     }
                 },
                 "menuId": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "meta": {
                     "description": "附加属性",
@@ -6827,7 +6569,7 @@
                 },
                 "parentId": {
                     "description": "父菜单ID",
-                    "type": "string"
+                    "type": "integer"
                 },
                 "path": {
                     "description": "路由path",
