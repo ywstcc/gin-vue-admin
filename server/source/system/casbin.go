@@ -82,16 +82,6 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "888", V1: "/user/setUserAuthorities", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/user/resetPassword", V2: "POST"},
 
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/findFile", V2: "GET"},
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/breakpointContinueFinish", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/breakpointContinue", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/removeChunk", V2: "POST"},
-
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/upload", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/deleteFile", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/editFileName", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/fileUploadAndDownload/getFileList", V2: "POST"},
-
 		{Ptype: "p", V0: "888", V1: "/casbin/updateCasbin", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/casbin/getPolicyPathByAuthorityId", V2: "POST"},
 
@@ -100,12 +90,6 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "888", V1: "/system/getSystemConfig", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/system/setSystemConfig", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/system/getServerInfo", V2: "POST"},
-
-		{Ptype: "p", V0: "888", V1: "/customer/customer", V2: "GET"},
-		{Ptype: "p", V0: "888", V1: "/customer/customer", V2: "PUT"},
-		{Ptype: "p", V0: "888", V1: "/customer/customer", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/customer/customer", V2: "DELETE"},
-		{Ptype: "p", V0: "888", V1: "/customer/customerList", V2: "GET"},
 
 		{Ptype: "p", V0: "888", V1: "/autoCode/getDB", V2: "GET"},
 		{Ptype: "p", V0: "888", V1: "/autoCode/getMeta", V2: "POST"},
@@ -144,10 +128,6 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 
 		{Ptype: "p", V0: "888", V1: "/email/emailTest", V2: "POST"},
 
-		{Ptype: "p", V0: "888", V1: "/simpleUploader/upload", V2: "POST"},
-		{Ptype: "p", V0: "888", V1: "/simpleUploader/checkFileMd5", V2: "GET"},
-		{Ptype: "p", V0: "888", V1: "/simpleUploader/mergeFileMd5", V2: "GET"},
-
 		{Ptype: "p", V0: "888", V1: "/authorityBtn/setAuthorityBtn", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/authorityBtn/getAuthorityBtn", V2: "POST"},
 		{Ptype: "p", V0: "888", V1: "/authorityBtn/canRemoveAuthorityBtn", V2: "POST"},
@@ -185,20 +165,11 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "8881", V1: "/user/changePassword", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/user/getUserList", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/user/setUserAuthority", V2: "POST"},
-		{Ptype: "p", V0: "8881", V1: "/fileUploadAndDownload/upload", V2: "POST"},
-		{Ptype: "p", V0: "8881", V1: "/fileUploadAndDownload/getFileList", V2: "POST"},
-		{Ptype: "p", V0: "8881", V1: "/fileUploadAndDownload/deleteFile", V2: "POST"},
-		{Ptype: "p", V0: "8881", V1: "/fileUploadAndDownload/editFileName", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/casbin/updateCasbin", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/casbin/getPolicyPathByAuthorityId", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/jwt/jsonInBlacklist", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/system/getSystemConfig", V2: "POST"},
 		{Ptype: "p", V0: "8881", V1: "/system/setSystemConfig", V2: "POST"},
-		{Ptype: "p", V0: "8881", V1: "/customer/customer", V2: "POST"},
-		{Ptype: "p", V0: "8881", V1: "/customer/customer", V2: "PUT"},
-		{Ptype: "p", V0: "8881", V1: "/customer/customer", V2: "DELETE"},
-		{Ptype: "p", V0: "8881", V1: "/customer/customer", V2: "GET"},
-		{Ptype: "p", V0: "8881", V1: "/customer/customerList", V2: "GET"},
 		{Ptype: "p", V0: "8881", V1: "/user/getUserInfo", V2: "GET"},
 
 		{Ptype: "p", V0: "9528", V1: "/user/admin_register", V2: "POST"},
@@ -226,20 +197,11 @@ func (i *initCasbin) InitializeData(ctx context.Context) (context.Context, error
 		{Ptype: "p", V0: "9528", V1: "/user/changePassword", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/user/getUserList", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/user/setUserAuthority", V2: "POST"},
-		{Ptype: "p", V0: "9528", V1: "/fileUploadAndDownload/upload", V2: "POST"},
-		{Ptype: "p", V0: "9528", V1: "/fileUploadAndDownload/getFileList", V2: "POST"},
-		{Ptype: "p", V0: "9528", V1: "/fileUploadAndDownload/deleteFile", V2: "POST"},
-		{Ptype: "p", V0: "9528", V1: "/fileUploadAndDownload/editFileName", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/casbin/updateCasbin", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/casbin/getPolicyPathByAuthorityId", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/jwt/jsonInBlacklist", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/system/getSystemConfig", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/system/setSystemConfig", V2: "POST"},
-		{Ptype: "p", V0: "9528", V1: "/customer/customer", V2: "PUT"},
-		{Ptype: "p", V0: "9528", V1: "/customer/customer", V2: "GET"},
-		{Ptype: "p", V0: "9528", V1: "/customer/customer", V2: "POST"},
-		{Ptype: "p", V0: "9528", V1: "/customer/customer", V2: "DELETE"},
-		{Ptype: "p", V0: "9528", V1: "/customer/customerList", V2: "GET"},
 		{Ptype: "p", V0: "9528", V1: "/autoCode/createTemp", V2: "POST"},
 		{Ptype: "p", V0: "9528", V1: "/user/getUserInfo", V2: "GET"},
 	}

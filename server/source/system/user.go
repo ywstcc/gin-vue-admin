@@ -51,7 +51,6 @@ func (i *initUser) InitializeData(ctx context.Context) (next context.Context, er
 		apStr = "123456"
 	}
 
-	password := utils.BcryptHash(apStr)
 	adminPassword := utils.BcryptHash(apStr)
 
 	entities := []sysModel.SysUser{
@@ -59,21 +58,12 @@ func (i *initUser) InitializeData(ctx context.Context) (next context.Context, er
 			UUID:        uuid.Must(uuid.NewV4()),
 			Username:    "admin",
 			Password:    adminPassword,
-			NickName:    "Mr.奇淼",
+			NickName:    "超级管理员",
 			HeaderImg:   "https://qmplusimg.henrongyi.top/gva_header.jpg",
 			AuthorityId: 888,
 			Phone:       "17611111111",
 			Email:       "333333333@qq.com",
 		},
-		{
-			UUID:        uuid.Must(uuid.NewV4()),
-			Username:    "a303176530",
-			Password:    password,
-			NickName:    "用户1",
-			HeaderImg:   "https:///qmplusimg.henrongyi.top/1572075907logo.png",
-			AuthorityId: 9528,
-			Phone:       "17611111111",
-			Email:       "333333333@qq.com"},
 	}
 	if err = db.Create(&entities).Error; err != nil {
 		return ctx, errors.Wrap(err, sysModel.SysUser{}.TableName()+"表数据初始化失败!")
@@ -86,9 +76,6 @@ func (i *initUser) InitializeData(ctx context.Context) (next context.Context, er
 	if err = db.Model(&entities[0]).Association("Authorities").Replace(authorityEntities); err != nil {
 		return next, err
 	}
-	if err = db.Model(&entities[1]).Association("Authorities").Replace(authorityEntities[:1]); err != nil {
-		return next, err
-	}
 	return next, err
 }
 
@@ -98,7 +85,7 @@ func (i *initUser) DataInserted(ctx context.Context) bool {
 		return false
 	}
 	var record sysModel.SysUser
-	if errors.Is(db.Where("username = ?", "a303176530").
+	if errors.Is(db.Where("username = ?", "admin").
 		Preload("Authorities").First(&record).Error, gorm.ErrRecordNotFound) { // 判断是否存在数据
 		return false
 	}
